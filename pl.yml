@@ -18,8 +18,8 @@
 - hosts: swarm_managers
   vars:
     swarm_master_pass: 'root'
-    swarm_join_addr: "192.168.75.11:2377"
-    swarm_master: "192.168.75.11"
+    swarm_join_addr: "{{master}}:2377"
+    swarm_master: "{{master}}"
   roles:
       - role: swarm_manager
         tags: manager
@@ -28,8 +28,8 @@
 - hosts: swarm_workers
   vars:
     swarm_master_pass: 'root'
-    swarm_join_addr: "192.168.75.11:2377"
-    swarm_master: "192.168.75.11"
+    swarm_join_addr: "{{master}}:2377"
+    swarm_master: "{{master}}"
   roles:
       - role: swarm_worker
         tags: init
