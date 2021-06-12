@@ -11,8 +11,9 @@
 
   
   register: result
+  ignore_errors: yes
   failed_when:
     - result.rc != 0
     - '"This node is already part of a swarm " not in result.stderr'
-
+  tags: swarm_worker
  
