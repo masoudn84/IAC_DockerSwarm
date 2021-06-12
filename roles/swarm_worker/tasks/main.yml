@@ -1,0 +1,2 @@
+---
+- import_tasks: swarm_worker.yml

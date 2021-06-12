@@ -1,0 +1,27 @@
+[all]
+192.168.106.91
+192.168.106.90
+192.168.106.89
+[redis-master]
+192.168.106.91
+
+[redis-slave]
+192.168.106.90
+192.168.106.89
+
+[redis-sentinel]
+192.168.106.90 redis_sentinel=True
+192.168.106.89 redis_sentinel=True
+192.168.106.91 redis_sentinel=True
+[test]
+192.168.106.92
+[docker_machines]
+192.168.106.92
+192.168.106.90
+192.168.106.89
+[swarm_master]
+192.168.106.92
+[swarm_managers]
+192.168.106.90
+[swarm_workers]
+192.168.106.89
