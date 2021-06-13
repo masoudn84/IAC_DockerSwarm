@@ -6,7 +6,7 @@
 - name: copy token
   copy:
     src: temp/worker_token.txt
-    dest: /root/
+    dest: /root/worker_token.txt
 - name: join swarm as a worker
   shell: |
     docker swarm join --token  $(cat /root/worker_token.txt) "{{ swarm_join_addr }}"
