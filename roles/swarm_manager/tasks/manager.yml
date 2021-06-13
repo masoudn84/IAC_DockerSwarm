@@ -2,7 +2,7 @@
 - name: leave swarm
   shell: |
     docker swarm leave --force
-  when: inventory_hostname not in group['master']
+  when: inventory_hostname not in groups['master']
   ignore_errors: yes
   tags: leave
 # - hosts: swarm_managers
@@ -14,7 +14,7 @@
 - name: join swarm as a manager
   shell: |
     docker swarm join --token  $(cat /root/manager_token.txt) "{{ swarm_join_addr }}"
-  when: inventory_hostname not in group['master']
+  when: inventory_hostname not in groups['master']
   register: result
   failed_when:
     - result.rc != 0
