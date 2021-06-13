@@ -4,10 +4,9 @@
   ignore_errors: yes
 
 - name: copy token
-  shell: >
-          sshpass -p {{ swarm_master_pass }} scp -o StrictHostKeyChecking=no \
-          -o NoHostAuthenticationForLocalhost=yes -o UserKnownHostsFile=/dev/null \
-           {{ swarm_master }}:/root/worker_token.txt /root/
+  copy:
+    src: temp/worker_token.txt
+    dest: /root/
 - name: join swarm as a worker
   shell: |
     docker swarm join --token  $(cat /root/worker_token.txt) "{{ swarm_join_addr }}"
