@@ -4,6 +4,7 @@
     docker swarm leave --force
   when: ansible_host_inventory not in group['master']
   ignore_errors: yes
+  tags: leave
 # - hosts: swarm_managers
 #   tasks:
 - name: copy token
