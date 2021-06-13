@@ -15,10 +15,23 @@
     docker swarm join-token manager -q > /root/manager_token.txt
   register: manager
 
+- name: fetch manager-token
+  fetch:
+    src: /root/manager_token.txt
+    dest: temp/
+    flat: yes
+
+    
 - name: swarm group
   shell: |
     docker swarm join-token worker -q > /root/worker_token.txt
   register: worker
+
+- name: fetch worker-token
+  fetch:
+    src: /root/worker_token.txt
+    dest: temp/
+    flat: yes
 
 - set_fact:
     swarm_join_addr: "{{ inventory_hostname }}:2377"
