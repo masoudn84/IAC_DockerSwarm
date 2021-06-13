@@ -22,6 +22,7 @@
     swarm_master: "192.168.75.11"
   roles:
       - role: swarm_manager
+        tags: manager
         
     #  - portainer
 - hosts: swarm_workers
