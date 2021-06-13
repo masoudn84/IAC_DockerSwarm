@@ -6,10 +6,9 @@
 # - hosts: swarm_managers
 #   tasks:
 - name: copy token
-  shell: >
-          sshpass -p {{ swarm_master_pass }} scp -o StrictHostKeyChecking=no \
-          -o NoHostAuthenticationForLocalhost=yes -o UserKnownHostsFile=/dev/null \
-           {{ swarm_master }}:/root/manager_token.txt /root/
+  copy:
+    src: temp/manager_token.txt
+    dest: /root/manager_token.txt
 - name: join swarm as a manager
   shell: |
     docker swarm join --token  $(cat /root/manager_token.txt) "{{ swarm_join_addr }}"
