@@ -13,14 +13,16 @@
   
   hosts: swarm_master
   roles:
-      - swarm_init
+      - role: swarm_init
+        tags: init
 - hosts: swarm_managers
   vars:
     swarm_master_pass: 'root'
     swarm_join_addr: "192.168.75.11:2377"
     swarm_master: "192.168.75.11"
   roles:
-      - swarm_manager
+      - role: swarm_manager
+        tags: init
     #  - portainer
 - hosts: swarm_workers
   vars:
@@ -28,4 +30,5 @@
     swarm_join_addr: "192.168.75.11:2377"
     swarm_master: "192.168.75.11"
   roles:
-      - swarm_worker
+      - role: swarm_worker
+        tags: init
