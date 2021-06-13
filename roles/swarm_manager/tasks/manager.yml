@@ -2,7 +2,7 @@
 - name: leave swarm
   shell: |
     docker swarm leave --force
-  when: ansible_ssh_host != 192.168.75.11
+  
   ignore_errors: yes
   tags: leave
 # - hosts: swarm_managers
@@ -14,7 +14,7 @@
 - name: join swarm as a manager
   shell: |
     docker swarm join --token  $(cat /root/manager_token.txt) "{{ swarm_join_addr }}"
-  when: ansible_ssh_host != 192.168.75.11
+  
   register: result
   failed_when:
     - result.rc != 0
