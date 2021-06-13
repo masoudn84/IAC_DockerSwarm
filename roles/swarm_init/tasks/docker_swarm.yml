@@ -8,7 +8,6 @@
   shell: |
     docker swarm init --advertise-addr {{ inventory_hostname }} --data-path-addr {{ inventory_hostname }}
   register: result
-  ignore_errors: yes
   tags: init
 
 - name: manager token
