@@ -1,3 +1,7 @@
+- name: leave swarm
+  shell: |
+    docker swarm leave --force
+  ignore_errors: yes
 
 - name: copy token
   shell: >
