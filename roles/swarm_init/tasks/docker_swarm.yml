@@ -16,7 +16,7 @@
   register: manager
 
 - name: fetch manager-token
-  run_once: yes
+  run_once: no
   fetch:
     src: /root/manager_token.txt
     dest: temp/
@@ -29,7 +29,7 @@
   register: worker
 
 - name: fetch worker-token
-  run_once: yes
+  run_once: no
   fetch:
     src: /root/worker_token.txt
     dest: temp/
