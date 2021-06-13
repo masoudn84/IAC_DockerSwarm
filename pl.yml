@@ -17,15 +17,15 @@
 - hosts: swarm_managers
   vars:
     swarm_master_pass: 'root'
-    swarm_join_addr: "192.168.106.92:2377"
-    swarm_master: "192.168.106.92"
+    swarm_join_addr: "192.168.75.11:2377"
+    swarm_master: "192.168.75.11"
   roles:
       - swarm_manager
       - portainer
 - hosts: swarm_workers
   vars:
     swarm_master_pass: 'root'
-    swarm_join_addr: "192.168.106.92:2377"
-    swarm_master: "192.168.106.92"
+    swarm_join_addr: "192.168.75.11:2377"
+    swarm_master: "192.168.75.11"
   roles:
       - swarm_worker
