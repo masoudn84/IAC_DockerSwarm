@@ -6,6 +6,7 @@
     - dependency
     - add_repo
     - install_docker
+    - install_compose
     - service
     - firewall
 
