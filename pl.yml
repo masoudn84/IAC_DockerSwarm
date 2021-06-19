@@ -16,6 +16,8 @@
   roles:
       - role: swarm_init
         tags: init
+     #  - portainer
+
 - hosts: swarm_managers
   vars:
     swarm_master_pass: 'root'
@@ -25,7 +27,6 @@
       - role: swarm_manager
         tags: manager
         
-    #  - portainer
 - hosts: swarm_workers
   vars:
     swarm_master_pass: 'root'
