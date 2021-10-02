@@ -1,0 +1,37 @@
+---
+- name: install docker
+  hosts: docker_machines
+  gather_facts: false
+  roles:
+    - dependency
+    - add_repo
+    - install_docker
+    - install_compose
+    - service
+    - firewall
+
+- name: init swarm
+  
+  hosts: swarm_master
+  roles:
+      - role: swarm_init
+        tags: init
+     #  - portainer
+
+- hosts: swarm_managers
+  vars:
+    swarm_master_pass: 'root'
+    swarm_join_addr: "{{master}}:2377"
+    swarm_master: "{{master}}"
+  roles:
+      - role: swarm_manager
+        tags: manager
+        
+- hosts: swarm_workers
+  vars:
+    swarm_master_pass: 'root'
+    swarm_join_addr: "{{master}}:2377"
+    swarm_master: "{{master}}"
+  roles:
+      - role: swarm_worker
+        tags: init

@@ -1,0 +1,42 @@
+---
+- name: leave swarm
+  shell: |
+    docker swarm leave --force
+  ignore_errors: yes
+
+- name: swarm init
+  shell: |
+    docker swarm init --advertise-addr {{ inventory_hostname }} --data-path-addr {{ inventory_hostname }}
+  register: result
+  tags: init
+
+- name: manager token
+  shell: |
+    docker swarm join-token manager -q > /root/manager_token.txt
+  register: manager
+
+- name: fetch manager-token
+  run_once: no
+  fetch:
+    src: /root/manager_token.txt
+    dest: temp/
+    flat: yes
+
+    
+- name: swarm group
+  shell: |
+    docker swarm join-token worker -q > /root/worker_token.txt
+  register: worker
+
+- name: fetch worker-token
+  run_once: no
+  fetch:
+    src: /root/worker_token.txt
+    dest: temp/
+    flat: yes
+
+- set_fact:
+    swarm_join_addr: "{{ inventory_hostname }}:2377"
+    manager: "{{ manager.stdout }}"
+    swarmworker_token: "{{ worker.stdout }}"       
+      

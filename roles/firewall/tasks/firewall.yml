@@ -1,0 +1,13 @@
+---
+
+
+- name: open port 2377
+  firewalld:
+    port: 2377/tcp
+    permanent: true
+    state: enabled
+- name: restart firewall
+  systemd:
+    name: firewalld
+    state: reloaded
+    

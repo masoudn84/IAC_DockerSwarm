@@ -1,0 +1,23 @@
+---
+- name: leave swarm
+  shell: |
+    docker swarm leave --force
+  
+  ignore_errors: yes
+  tags: leave
+# - hosts: swarm_managers
+#   tasks:
+- name: copy token
+  copy:
+    src: temp/manager_token.txt
+    dest: /root/manager_token.txt
+- name: join swarm as a manager
+  shell: |
+    docker swarm join --token  $(cat /root/manager_token.txt) "{{ swarm_join_addr }}"
+  
+  register: result
+  failed_when:
+    - result.rc != 0
+    - '"This node is already part of a swarm " not in result.stderr' 
+  ignore_errors: yes
+  tags: swarm
